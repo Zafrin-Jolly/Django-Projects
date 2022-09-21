@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <section class='bg-primary_black  min-h-screen flex justify-center py-10'>
+        <div class="p-8 w-10/12 relative" >
+            <h2 class="text-gray-200 text-2xl font-medium">
+                Popular on Netflix
+            </h2>
+                </center>
+                </h1>
+                <div class="flex justify-center  items-center min-w-full  movie_lis">
+                    {% for movie in movies %}
+                    <a href="{% url 'netflix_app:movie-detail' movie_code=movie.video_code %}">
+                        <div class=" h-40 m-4  bg-blue-500 flex-shrink-0 rounded-md cursor-pointer w-40">
+                            <img src="{{movie.thumbnail.url}}" class="w-full h-full " alt="">
+                            <h5 style="color:rgb(234, 223, 223); text-align:center">{{movie.title}}</h5>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    
+
+                    
+
+                
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    {% endblock content %}

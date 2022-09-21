@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video Playlist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container" align="center">
+        <h2 ><b><center>Welocme To Video Playlist</center></b></h2>
+        <br>
+        <br>
+         <div >
+                <a href=" ">Home</a>&nbsp&nbsp
+                <a href="add">Upload New Video</a>&nbsp&nbsp
+                <br>
+                <br>
+
+        </div>
+        <div class="row" align="center">
+            {% for x in users %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class ="card">
+                    <video 
+    
+                    id="my-video"
+                    class="video-js"
+                    controls
+                    preload="auto"
+                    width="300"
+                    height="150"
+                    {% if x.thumb %}
+                    poster="{{x.thumb.url}}"
+                    data-setup="{}"
+                    {% endif %} 
+                    
+                    controls >
+                    
+                        <source src="{{x.video.url}}" type="video/mp4" class ="card-img-mid"/>
+                    </video>
+                    <div class="card-body">
+                        <h4 class="card-title">{{x.caption}}</h3>
+                            <!-- edit -->
+                            <a href="{% url 'edit' x.id %}" class="btn text-secondary px-0">
+                                Edit</a>&nbsp&nbsp
+                                <!-- Delete-->
+                            <form action="{% url 'delete' x.id %}" method="POST">
+                                {% csrf_token%}
+                                <button type="submit">Delete</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+
+                        {% if users.has_other_pages %}
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+							{% if users.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}">Previous</a></li>
+							{% else %}
+							<li class="disabled"></li>
+							{% endif %}
+							{% for i in users.paginator.page_range %}
+							{% if users.number == i %}
+
+                            <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">{{ i }}</a></li>
+                            <li class="page-item active" aria-current="page">
+                            </li>
+							{% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+							{% endif %}
+							{% endfor %}
+							{% if users.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}">Next</a></li>
+							{% else %}
+							<li class="disabled"></li>
+							{% endif %}
+							</ul>
+						{% endif %}
+    </div>
+    <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </body>
+</html>

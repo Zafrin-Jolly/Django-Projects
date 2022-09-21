@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      {% for mov in movie %}
+      <div class="col">
+              <video 
+
+              id="my-video"
+              class="video-js"
+              autoplay
+              loop
+              controlsList
+              preload="auto"
+              width="1540"
+              height="500"
+              
+              
+              controls >
+                  <source src="{{mov.file.url}}" type="video/mp4" class ="card-img-top"/>
+              </video>
+          </div>
+          {% if error %}
+          {{ error }}
+          {% endif %}
+      {% endfor %}
+
+
+{% endblock content %}

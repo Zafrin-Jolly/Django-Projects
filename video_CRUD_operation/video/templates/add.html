@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video</title>
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    <script src="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+ 
+</head>
+<body>
+    <div class="container">
+        <h1 ><center><u>Make your own Playlist</u></center></h1>
+        <div >
+                <a href="index">Home</a>&nbsp&nbsp
+                <a href="/delete">Delete Video</a>&nbsp&nbsp
+                <a href="/update/">Update Video</a>&nbsp&nbsp
+                <br>
+                <br>
+
+        </div>
+        <h1>{{msg}}</h1>
+        <form id="contact" action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>Upload Video with Information</h1>
+            <h3>Fill the form below and Hit the upload</h3>
+
+            <h1>{{msg}}</h1>
+  
+            {{form}}
+            <fieldset>
+                <button type="submit" id="button">Upload</button>
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>
